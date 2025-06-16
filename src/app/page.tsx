@@ -1,9 +1,13 @@
-import { ChatLayout } from "@/components/chat/ChatLayout";
+'use client';
+
+import Chat from '@/components/chat';
+import Sidebar from '@/components/sidebar';
 
 export default function HomePage() {
   return (
-    <main className="h-screen">
-      <ChatLayout />
-    </main>
+    <div className="flex h-screen bg-gray-100">
+      <Sidebar />
+      <Chat />
+    </div>
   );
 }
