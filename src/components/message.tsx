@@ -26,116 +26,134 @@ export default function Message({ message }: MessageProps) {
   }
 
   return (
-    <div className={`py-6 ${isUser ? 'bg-gray-50' : 'bg-white'}`}>
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="flex gap-4">
+    <div
+      className={`group w-full text-gray-800 border-b border-black/10 ${
+        isUser ? 'bg-gray-50' : 'bg-white'
+      }`}
+    >
+      <div className="text-base gap-4 md:gap-6 md:max-w-2xl lg:max-w-xl xl:max-w-3xl p-4 md:py-6 flex lg:px-0 m-auto">
+        <div className="flex-shrink-0 flex flex-col relative items-end">
           {/* Avatar */}
           <div
-            className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-              isUser ? 'bg-blue-500' : 'bg-green-500'
+            className={`relative h-7 w-7 p-1 rounded-sm text-white flex items-center justify-center ${
+              isUser ? 'bg-[#19c37d]' : 'bg-[#10a37f]'
             }`}
           >
             {isUser ? (
-              <UserIcon className="w-5 h-5 text-white" />
+              <UserIcon className="w-4 h-4" />
             ) : (
-              <CpuChipIcon className="w-5 h-5 text-white" />
+              <CpuChipIcon className="w-4 h-4" />
             )}
           </div>
+        </div>
 
-          {/* Content */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="font-semibold text-gray-900">
-                {isUser ? '사용자' : 'AI 어시스턴트'}
-              </span>
-              {message.model && (
-                <span className="text-xs text-gray-500 bg-gray-200 px-2 py-0.5 rounded">
-                  {message.model}
-                </span>
-              )}
-              <span className="text-xs text-gray-400">
-                {format(message.timestamp, 'HH:mm', { locale: ko })}
-              </span>
-            </div>
-
-            <div className="prose prose-sm max-w-none text-gray-800">
+        {/* Content */}
+        <div className="relative flex w-[calc(100%-50px)] flex-col gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
+          <div className="flex flex-grow flex-col gap-3">
+            <div className="min-h-[20px] flex flex-col items-start gap-4 whitespace-pre-wrap">
               {isUser ? (
-                <div className="whitespace-pre-wrap">{message.content}</div>
+                <div className="flex flex-col leading-7">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="font-semibold text-gray-900">사용자</span>
+                    <span className="text-xs text-gray-400">
+                      {format(message.timestamp, 'HH:mm', { locale: ko })}
+                    </span>
+                  </div>
+                  <div className="whitespace-pre-wrap">{message.content}</div>
+                </div>
               ) : (
-                <ReactMarkdown
-                  components={{
-                    code({ className, children, ...props }: any) {
-                      const match = /language-(\w+)/.exec(className || '');
-                      const isInline = !match;
+                <div className="flex flex-col leading-7">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="font-semibold text-gray-900">ChatGPT</span>
+                    {message.model && (
+                      <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
+                        {message.model}
+                      </span>
+                    )}
+                    <span className="text-xs text-gray-400">
+                      {format(message.timestamp, 'HH:mm', { locale: ko })}
+                    </span>
+                  </div>
+                  <div className="markdown prose prose-sm max-w-none">
+                    <ReactMarkdown
+                      components={{
+                        code({ className, children, ...props }: any) {
+                          const match = /language-(\w+)/.exec(className || '');
+                          const isInline = !match;
 
-                      return isInline ? (
-                        <code
-                          className="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono"
-                          {...props}
-                        >
-                          {children}
-                        </code>
-                      ) : (
-                        <SyntaxHighlighter
-                          style={oneDark as any}
-                          language={match[1]}
-                          PreTag="div"
-                          className="rounded-md !mt-2 !mb-2"
-                        >
-                          {String(children).replace(/\n$/, '')}
-                        </SyntaxHighlighter>
-                      );
-                    },
-                    pre({ children }) {
-                      return <>{children}</>;
-                    },
-                    blockquote({ children }) {
-                      return (
-                        <blockquote className="border-l-4 border-gray-300 pl-4 italic text-gray-600">
-                          {children}
-                        </blockquote>
-                      );
-                    },
-                    h1({ children }) {
-                      return (
-                        <h1 className="text-xl font-bold mt-4 mb-2">
-                          {children}
-                        </h1>
-                      );
-                    },
-                    h2({ children }) {
-                      return (
-                        <h2 className="text-lg font-bold mt-3 mb-2">
-                          {children}
-                        </h2>
-                      );
-                    },
-                    h3({ children }) {
-                      return (
-                        <h3 className="text-md font-bold mt-2 mb-1">
-                          {children}
-                        </h3>
-                      );
-                    },
-                    ul({ children }) {
-                      return (
-                        <ul className="list-disc pl-6 space-y-1">{children}</ul>
-                      );
-                    },
-                    ol({ children }) {
-                      return (
-                        <ol className="list-decimal pl-6 space-y-1">
-                          {children}
-                        </ol>
-                      );
-                    },
-                    p({ children }) {
-                      return <p className="mb-2 leading-relaxed">{children}</p>;
-                    },
-                  }}
-                >
-                  {message.content}
-                </ReactMarkdown>
+                          return isInline ? (
+                            <code
+                              className="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono"
+                              {...props}
+                            >
+                              {children}
+                            </code>
+                          ) : (
+                            <SyntaxHighlighter
+                              style={oneDark as any}
+                              language={match[1]}
+                              PreTag="div"
+                              className="rounded-md !mt-2 !mb-2"
+                            >
+                              {String(children).replace(/\n$/, '')}
+                            </SyntaxHighlighter>
+                          );
+                        },
+                        pre({ children }) {
+                          return <>{children}</>;
+                        },
+                        p({ children }) {
+                          return <p className="mb-3 last:mb-0">{children}</p>;
+                        },
+                        h1({ children }) {
+                          return (
+                            <h1 className="text-xl font-bold mt-4 mb-3">
+                              {children}
+                            </h1>
+                          );
+                        },
+                        h2({ children }) {
+                          return (
+                            <h2 className="text-lg font-bold mt-3 mb-2">
+                              {children}
+                            </h2>
+                          );
+                        },
+                        h3({ children }) {
+                          return (
+                            <h3 className="text-md font-bold mt-2 mb-1">
+                              {children}
+                            </h3>
+                          );
+                        },
+                        ul({ children }) {
+                          return (
+                            <ul className="list-disc pl-6 mb-3">{children}</ul>
+                          );
+                        },
+                        ol({ children }) {
+                          return (
+                            <ol className="list-decimal pl-6 mb-3">
+                              {children}
+                            </ol>
+                          );
+                        },
+                        li({ children }) {
+                          return <li className="mb-1">{children}</li>;
+                        },
+                        blockquote({ children }) {
+                          return (
+                            <blockquote className="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-3">
+                              {children}
+                            </blockquote>
+                          );
+                        },
+                      }}
+                    >
+                      {message.content}
+                    </ReactMarkdown>
+                  </div>
+                </div>
               )}
             </div>
           </div>

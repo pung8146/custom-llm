@@ -66,10 +66,13 @@ export default function ChatInput({
   const canSend = message.trim() && !disabled && !isLoading;
 
   return (
-    <div className="border-t border-gray-200 bg-white">
-      <div className="max-w-4xl mx-auto px-4 py-4">
-        <form onSubmit={handleSubmit} className="relative">
-          <div className="relative flex items-end">
+    <div className="absolute bottom-0 left-0 w-full border-t border-white/20 bg-white pt-2">
+      <div className="mx-2 flex flex-row gap-3 last:mb-2 md:mx-4 md:last:mb-6 lg:mx-auto lg:max-w-2xl xl:max-w-3xl">
+        <form
+          onSubmit={handleSubmit}
+          className="relative flex h-full flex-1 items-stretch"
+        >
+          <div className="flex flex-col w-full py-[10px] flex-grow relative border border-black/10 bg-white rounded-xl shadow-[0_0_10px_rgba(0,0,0,0.10)]">
             <textarea
               ref={textareaRef}
               value={message}
@@ -78,46 +81,41 @@ export default function ChatInput({
               placeholder={placeholder}
               disabled={disabled}
               rows={1}
-              className="flex-1 resize-none bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 pr-16 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+              className="m-0 w-full resize-none border-0 bg-transparent p-0 pr-12 pl-4 focus:ring-0 focus-visible:ring-0 outline-none"
               style={{
-                minHeight: '52px',
+                minHeight: '24px',
                 maxHeight: '200px',
               }}
             />
 
             {/* Send/Stop Button */}
-            <div className="absolute right-2 bottom-2">
+            <div className="absolute right-2 bottom-1.5">
               {isLoading ? (
                 <button
                   type="button"
                   onClick={handleStop}
-                  className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                  className="p-1 rounded-md text-gray-500 hover:text-red-600 hover:bg-red-50 transition-colors"
                   title="생성 중단"
                 >
-                  <StopIcon className="w-5 h-5" />
+                  <StopIcon className="w-4 h-4" />
                 </button>
               ) : (
                 <button
                   type="submit"
                   disabled={!canSend}
-                  className={`p-2 rounded-md transition-colors ${
+                  className={`p-1 rounded-md transition-colors ${
                     canSend
-                      ? 'text-blue-600 hover:bg-blue-50 hover:text-blue-700'
-                      : 'text-gray-300 cursor-not-allowed'
+                      ? 'text-white bg-black hover:bg-gray-800'
+                      : 'text-gray-300 bg-gray-100 cursor-not-allowed'
                   }`}
                   title="메시지 전송"
                 >
-                  <PaperAirplaneIcon className="w-5 h-5" />
+                  <PaperAirplaneIcon className="w-4 h-4" />
                 </button>
               )}
             </div>
           </div>
         </form>
-
-        {/* Info Text */}
-        <div className="mt-2 text-center text-xs text-gray-500">
-          Enter로 전송, Shift+Enter로 줄바꿈
-        </div>
       </div>
     </div>
   );

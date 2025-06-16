@@ -128,7 +128,7 @@ export default function Chat() {
 
   if (!selectedModel) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-gray-50">
+      <div className="flex-1 flex items-center justify-center bg-white">
         <div className="text-center">
           <SparklesIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <h2 className="text-xl font-semibold text-gray-600 mb-2">
@@ -144,8 +144,8 @@ export default function Chat() {
 
   if (!currentChat) {
     return (
-      <div className="flex-1 flex flex-col">
-        <div className="flex-1 flex items-center justify-center bg-gray-50">
+      <div className="flex-1 flex flex-col relative">
+        <div className="flex-1 flex items-center justify-center bg-white">
           <div className="text-center">
             <SparklesIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h2 className="text-xl font-semibold text-gray-600 mb-2">
@@ -174,30 +174,9 @@ export default function Chat() {
   }
 
   return (
-    <div className="flex-1 flex flex-col">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-4 py-3">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-lg font-semibold text-gray-900">
-                {currentChat.title}
-              </h1>
-              <p className="text-sm text-gray-500">
-                {selectedModel.name} • {currentChat.messages.length}개 메시지
-              </p>
-            </div>
-            {error && (
-              <div className="text-sm text-red-600 bg-red-50 px-3 py-1 rounded">
-                {error}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
+    <div className="flex-1 flex flex-col relative">
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto bg-gray-50">
+      <div className="flex-1 overflow-y-auto bg-white pb-32">
         {currentChat.messages.map((message) => (
           <Message key={message.id} message={message} />
         ))}
@@ -217,31 +196,37 @@ export default function Chat() {
 
         {/* Loading indicator */}
         {isLoading && !streamingMessage && (
-          <div className="py-6 bg-white">
-            <div className="max-w-4xl mx-auto px-4">
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
-                  <SparklesIcon className="w-5 h-5 text-white" />
+          <div className="group w-full text-gray-800 border-b border-black/10 bg-white">
+            <div className="text-base gap-4 md:gap-6 md:max-w-2xl lg:max-w-xl xl:max-w-3xl p-4 md:py-6 flex lg:px-0 m-auto">
+              <div className="flex-shrink-0 flex flex-col relative items-end">
+                <div className="relative h-7 w-7 p-1 rounded-sm bg-[#10a37f] text-white flex items-center justify-center">
+                  <SparklesIcon className="w-4 h-4" />
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="font-semibold text-gray-900">
-                      AI 어시스턴트
-                    </span>
-                    <span className="text-xs text-gray-500 bg-gray-200 px-2 py-0.5 rounded">
-                      {selectedModel.name}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                    <div
-                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                      style={{ animationDelay: '0.1s' }}
-                    ></div>
-                    <div
-                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                      style={{ animationDelay: '0.2s' }}
-                    ></div>
+              </div>
+              <div className="relative flex w-[calc(100%-50px)] flex-col gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
+                <div className="flex flex-grow flex-col gap-3">
+                  <div className="min-h-[20px] flex flex-col items-start gap-4 whitespace-pre-wrap">
+                    <div className="flex flex-col leading-7">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="font-semibold text-gray-900">
+                          ChatGPT
+                        </span>
+                        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
+                          {selectedModel.name}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div
+                          className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                          style={{ animationDelay: '0.1s' }}
+                        ></div>
+                        <div
+                          className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                          style={{ animationDelay: '0.2s' }}
+                        ></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
