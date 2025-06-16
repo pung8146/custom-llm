@@ -35,14 +35,14 @@ export default function Message({ message }: MessageProps) {
         <div className="flex-shrink-0 flex flex-col relative items-end">
           {/* Avatar */}
           <div
-            className={`relative h-7 w-7 p-1 rounded-sm text-white flex items-center justify-center ${
+            className={`relative h-8 w-8 rounded-sm text-white flex items-center justify-center ${
               isUser ? 'bg-[#19c37d]' : 'bg-[#10a37f]'
             }`}
           >
             {isUser ? (
-              <UserIcon className="w-4 h-4" />
+              <UserIcon className="w-5 h-5" />
             ) : (
-              <CpuChipIcon className="w-4 h-4" />
+              <CpuChipIcon className="w-5 h-5" />
             )}
           </div>
         </div>

@@ -199,8 +199,8 @@ export default function Chat() {
           <div className="group w-full text-gray-800 border-b border-black/10 bg-white">
             <div className="text-base gap-4 md:gap-6 md:max-w-2xl lg:max-w-xl xl:max-w-3xl p-4 md:py-6 flex lg:px-0 m-auto">
               <div className="flex-shrink-0 flex flex-col relative items-end">
-                <div className="relative h-7 w-7 p-1 rounded-sm bg-[#10a37f] text-white flex items-center justify-center">
-                  <SparklesIcon className="w-4 h-4" />
+                <div className="relative h-8 w-8 rounded-sm bg-[#10a37f] text-white flex items-center justify-center">
+                  <SparklesIcon className="w-5 h-5" />
                 </div>
               </div>
               <div className="relative flex w-[calc(100%-50px)] flex-col gap-1 md:gap-3 lg:w-[calc(100%-115px)]">

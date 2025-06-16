@@ -81,7 +81,7 @@ export default function ChatInput({
               placeholder={placeholder}
               disabled={disabled}
               rows={1}
-              className="m-0 w-full resize-none border-0 bg-transparent p-0 pr-12 pl-4 focus:ring-0 focus-visible:ring-0 outline-none"
+              className="m-0 w-full resize-none border-0 bg-transparent p-0 pr-14 pl-4 focus:ring-0 focus-visible:ring-0 outline-none"
               style={{
                 minHeight: '24px',
                 maxHeight: '200px',
@@ -89,28 +89,28 @@ export default function ChatInput({
             />
 
             {/* Send/Stop Button */}
-            <div className="absolute right-2 bottom-1.5">
+            <div className="absolute right-2 bottom-2">
               {isLoading ? (
                 <button
                   type="button"
                   onClick={handleStop}
-                  className="p-1 rounded-md text-gray-500 hover:text-red-600 hover:bg-red-50 transition-colors"
+                  className="p-2 rounded-md text-gray-500 hover:text-red-600 hover:bg-red-50 transition-colors"
                   title="생성 중단"
                 >
-                  <StopIcon className="w-4 h-4" />
+                  <StopIcon className="w-5 h-5" />
                 </button>
               ) : (
                 <button
                   type="submit"
                   disabled={!canSend}
-                  className={`p-1 rounded-md transition-colors ${
+                  className={`p-2 rounded-md transition-colors ${
                     canSend
                       ? 'text-white bg-black hover:bg-gray-800'
                       : 'text-gray-300 bg-gray-100 cursor-not-allowed'
                   }`}
                   title="메시지 전송"
                 >
-                  <PaperAirplaneIcon className="w-4 h-4" />
+                  <PaperAirplaneIcon className="w-5 h-5" />
                 </button>
               )}
             </div>

@@ -48,10 +48,10 @@ export default function Sidebar() {
       <div className="p-3 border-b border-white/10">
         <button
           onClick={handleNewChat}
-          className="w-full flex items-center gap-2 px-3 py-2.5 border border-white/20 hover:bg-white/10 rounded-lg transition-colors text-sm font-medium"
+          className="w-full flex items-center justify-center gap-2 px-3 py-2.5 border border-white/20 hover:bg-white/10 rounded-lg transition-colors text-sm font-medium"
           disabled={!selectedModel}
         >
-          <PlusIcon className="w-4 h-4" />
+          <PlusIcon className="w-4 h-4 flex-shrink-0" />
           새로운 채팅
         </button>
       </div>
@@ -75,7 +75,7 @@ export default function Sidebar() {
               )}
             </div>
             <ChevronDownIcon
-              className={`w-4 h-4 transition-transform ${
+              className={`w-4 h-4 flex-shrink-0 transition-transform ${
                 showModelSelector ? 'rotate-180' : ''
               }`}
             />
@@ -109,7 +109,7 @@ export default function Sidebar() {
       <div className="flex-1 overflow-y-auto">
         {chats.length === 0 ? (
           <div className="p-4 text-center text-white/40">
-            <ChatBubbleLeftIcon className="w-8 h-8 mx-auto mb-2 opacity-50" />
+            <ChatBubbleLeftIcon className="w-6 h-6 mx-auto mb-2 opacity-50" />
             <p className="text-sm">채팅이 없습니다</p>
           </div>
         ) : (
@@ -126,7 +126,7 @@ export default function Sidebar() {
               >
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <ChatBubbleLeftIcon className="w-3.5 h-3.5 flex-shrink-0" />
+                    <ChatBubbleLeftIcon className="w-4 h-4 flex-shrink-0" />
                     <span className="text-sm truncate">{chat.title}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-white/40">
@@ -141,7 +141,7 @@ export default function Sidebar() {
                   onClick={(e) => handleDeleteChat(e, chat.id)}
                   className="opacity-0 group-hover:opacity-100 p-1.5 hover:bg-red-500/20 rounded-md transition-all"
                 >
-                  <TrashIcon className="w-3.5 h-3.5 text-red-400" />
+                  <TrashIcon className="w-4 h-4 text-red-400 flex-shrink-0" />
                 </button>
               </div>
             ))}
@@ -152,7 +152,7 @@ export default function Sidebar() {
       {/* Settings */}
       <div className="p-3 border-t border-white/10">
         <button className="w-full flex items-center gap-2 px-3 py-2.5 text-white/60 hover:bg-white/5 rounded-lg transition-colors">
-          <Cog6ToothIcon className="w-4 h-4" />
+          <Cog6ToothIcon className="w-4 h-4 flex-shrink-0" />
           설정
         </button>
       </div>
