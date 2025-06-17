@@ -116,10 +116,10 @@ export default function Sidebar() {
           <div className="p-2">
             {chats.map((chat) => (
               <div
-                key={chat.id}
-                onClick={() => setCurrentChat(chat.id)}
+                key={chat?.id}
+                onClick={() => setCurrentChat(chat?.id)}
                 className={`group flex items-center justify-between p-2.5 rounded-lg cursor-pointer transition-all mb-1 ${
-                  currentChatId === chat.id
+                  currentChatId === chat?.id
                     ? 'bg-white/10 text-white'
                     : 'hover:bg-white/5 text-white/80'
                 }`}
@@ -127,18 +127,23 @@ export default function Sidebar() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <ChatBubbleLeftIcon className="w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm truncate">{chat.title}</span>
+                    <span className="text-sm truncate">{chat?.title}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-white/40">
-                    <span>{chat.model.name}</span>
+                    <span>{chat?.model.name}</span>
                     <span>•</span>
                     <span>
-                      {format(chat.updatedAt, 'MM/dd', { locale: ko })}
+                      {chat?.updatedAt
+                        ? new Date(chat.updatedAt).toLocaleDateString('ko-KR', {
+                            month: '2-digit',
+                            day: '2-digit',
+                          })
+                        : '-'}
                     </span>
                   </div>
                 </div>
                 <button
-                  onClick={(e) => handleDeleteChat(e, chat.id)}
+                  onClick={(e) => handleDeleteChat(e, chat?.id)}
                   className="opacity-0 group-hover:opacity-100 p-1.5 hover:bg-red-500/20 rounded-md transition-all"
                 >
                   <TrashIcon className="w-4 h-4 text-red-400 flex-shrink-0" />

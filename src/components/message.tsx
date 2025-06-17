@@ -56,7 +56,12 @@ export default function Message({ message }: MessageProps) {
                   <div className="flex items-center gap-2 mb-2">
                     <span className="font-semibold text-gray-900">사용자</span>
                     <span className="text-xs text-gray-400">
-                      {format(message.timestamp, 'HH:mm', { locale: ko })}
+                      {message.timestamp
+                        ? new Date(message.timestamp).toLocaleTimeString(
+                            'ko-KR',
+                            { hour: '2-digit', minute: '2-digit' }
+                          )
+                        : '-'}
                     </span>
                   </div>
                   <div className="whitespace-pre-wrap">{message.content}</div>
@@ -71,7 +76,12 @@ export default function Message({ message }: MessageProps) {
                       </span>
                     )}
                     <span className="text-xs text-gray-400">
-                      {format(message.timestamp, 'HH:mm', { locale: ko })}
+                      {message.timestamp
+                        ? new Date(message.timestamp).toLocaleTimeString(
+                            'ko-KR',
+                            { hour: '2-digit', minute: '2-digit' }
+                          )
+                        : '-'}
                     </span>
                   </div>
                   <div className="markdown prose prose-sm max-w-none">
